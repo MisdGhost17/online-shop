@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title }}</title>
+</head>
+<body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">
+                {{ message }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+    <form enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        <img src="{{ user.image.url }}">
+        <p>{{ form.image }}</p>
+        <p>{{ form.username }}</p>
+        <p>{{ form.email }}</p>
+        <p>{{ form.first_name }}</p>
+        <p>{{ form.last_name }}</p>
+        <p>{{ form.password1 }}</p>
+        <p>{{ form.password2 }}</p>
+        <button type="submit">Подтвердить</button>
+        <p>Есть аккаунт? <a href = "{% url 'login' %}">Войти</a></p>
+    </form>
+</body>
+</html>

@@ -1,0 +1,46 @@
+{% extends 'products/base.html' %}
+{% load static %}
+{% block content %}
+    <main>
+    {% if cat_sort %}
+        <form method="post" action="{% url 'search_products_in_category' cat_id %}">
+            {% csrf_token %}
+            <p>{{ search_form.search_field }}<input type="submit" value="Найти"></p>
+        </form>
+    {% else %}
+        <form method="post" action="{% url 'searchproducts' %}">
+            {% csrf_token %}
+            <p>{{ search_form.search_field }}<input type="submit" value="Найти"></p>
+        </form>
+    {% endif %}
+    {% for product in products %}
+        <div class="product">
+            <a href="{% url 'productdetail' product.id %}"><h1>{{ product.name }}</h1></a>
+            <p>Категория: {{ product.category.name }}</p>
+            <img class="product_image" src="{{ product.image.url }}"/>
+            <p>{{ product.short_description }}</p>
+            <p>{{ product.price }}</p>
+            <form action="{% url 'addproduct' product.id %}" method="post">
+                {% csrf_token %}
+                {{ cart_product_form }}
+                <input type="submit" value="В корзину">
+            </form>
+       </div>
+    {% endfor %}
+    </main>
+    <ul class="pagination">
+        {% if products.has_previous %}
+            <li class = "">
+                <a href="?page={{ products.previous_page_number }}"> {{ products.previous_page_number }}</a>
+            </li>
+        {% endif %}
+        <li>
+            <a href="?page={{ page }}" class="{% if products.number == page %} disabled {% endif %}">{{ page }}</a>
+        </li>
+        {% if products.has_next %}
+            <li class = "">
+                <a href="?page={{ products.next_page_number }}"> {{ products.next_page_number }}</a>
+            </li>
+        {% endif %}
+    </ul>
+{% endblock %}
