@@ -5,11 +5,6 @@ from products.forms import ProductSearchForm
 from django.core.paginator import Paginator
 
 def allproducts(request):
-
-    page = request.GET.get("page", 1)
-    paginator = Paginator(Product.objects.all(), 10)
-    current_page = paginator.page(int(page))
-
     cart_product_form = CartAddProductForm()
     context = {
         'title': 'Shop',
@@ -20,13 +15,11 @@ def allproducts(request):
     if request.method == 'POST':
         form = ProductSearchForm(data=request.POST)
         if form.is_valid():
-            paginator = Paginator(Product.objects.filter(name__icontains=form.cleaned_data['search_field']), 2)
-            current_page = paginator.page(int(page))
-            context['products']= current_page
+            context['products']= Product.objects.all()
             context['search_form']= form
     else:
         form = ProductSearchForm()
-        context['products'] = current_page
+        context['products'] = Product.objects.all()
         context['search_form'] = form
     return render(request, 'products/index.html', context)
 
@@ -34,9 +27,6 @@ def allproducts(request):
 def show_products_for_category(request, cat_id):
     category = ProductCategory.objects.get(pk=cat_id)
     products = Product.objects.filter(category=cat_id)
-    page = request.GET.get("page", 1)
-    paginator = Paginator(products, 10)
-    current_page = paginator.page(int(page))
     context = {
         'title': category.name,
         'categories': ProductCategory.objects.all(),
@@ -50,7 +40,7 @@ def show_products_for_category(request, cat_id):
             context['products']= products
             context['search_form'] = form
     else:
-        context['products'] = current_page
+        context['products'] = Product.objects.all()
         context['search_form'] = ProductSearchForm()
     return render(request, 'products/index.html', context)
 

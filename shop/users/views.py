@@ -31,9 +31,10 @@ def registration(request):
         form = UserRegisterForm(data=request.POST, files=request.FILES)
         password1 = request.POST['password1']
         password2 = request.POST['password2']
-        if User.objects.get(username=request.POST['username']):
-            messages.error(request, 'Username already taken.')
-            return HttpResponseRedirect(reverse('registration'))
+        for user in User.objects.all():
+            if user.username == request.POST['username']:
+                messages.error(request, 'Username already taken.')
+                return HttpResponseRedirect(reverse('registration'))
         if password1 == password2:
             if form.is_valid():
                 form.save()
