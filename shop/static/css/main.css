@@ -1,3 +1,6 @@
+*{
+    font-family: "Roboto", serif;
+}
 .product{
     display: inline-block;
     margin: 20px;
@@ -7,12 +10,58 @@
 }
 .categories{
     height: 60px;
+    position: absolute;
+    top: 60px;
 }
 .category{
     float: left;
+    margin-left: 20px;
+
 }
 
 .product_image{
     width: 500px;
     height: 500px;
+}
+
+a{
+    text-decoration: None;
+    color: black;
+}
+
+header{
+    position: absolute;
+    padding: 0;
+    width: 100%;
+    height: 50px;
+    background-color: black;
+    top: 0;
+    left: 0;
+}
+.logo h1 a{
+    color: white;
+    font-size: 40px;
+    margin-left: 0px;
+}
+
+.top-cart{
+
+}
+
+.username{
+    color: white;
+}
+
+.header-block{
+    display: inline-block;
+    margin-top: -20px;
+    margin-left: 10px;
+}
+
+.header-block a{
+        color: white;
+}
+
+.header-block p{
+    color: white;
 }

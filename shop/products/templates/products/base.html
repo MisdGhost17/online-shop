@@ -4,23 +4,43 @@
   <meta charset="UTF-8">
   <title>{{ title }}</title>
   <link href="{% static 'css/main.css' %}" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
+    <div class="shapka">
+    <div class="header-block logo">
+      <h1><a href = "{% url 'allproducts' %}">T</a></h1>
+    </div>
     {% if user.is_authenticated %}
+    <div class="header-block username">
       <p>{{ user.username }}</p>
-      <button><a href="{% url 'cart' %}">Корзина</a></button>
-      <button><a href="{% url 'profileupdate' %}">Личный кабинет</a></button>
-      <button><a href="{% url 'logout' %}">Выйти</a></button>
+    </div>
+    <div class="header-block">
+      <a href="{% url 'profileupdate' %}">Личный кабинет</a>
+    </div>
+    <div class="header-block">
+      <a href="{% url 'logout' %}">Выйти</a>
+    </div>
+    <div class="header-block top-cart">
+      <a href="{% url 'cart' %}">В корзину: {{ products_in_cart }}</a>
+    </div>
     {% else %}
-      <button><a href="{% url 'login' %}">Войти</a></button>
-      <button><a href="{% url 'registration' %}">Зарегистрироваться</a></button>
+    <div class="header-block">
+      <a href="{% url 'login' %}">Войти</a>
+    </div>
+    <div class="header-block">
+       <a href="{% url 'registration' %}">Зарегистрироваться</a>
+    </div>
+      </div>
     {% endif %}
   </header>
   <nav class="categories">
-    <button class ="category"><a href="{% url 'allproducts' %}">Каталог</a></button>
+    <a class ="category" href="{% url 'allproducts' %}">Каталог</a>
     {% for category in categories %}
-        <button class="category"><a href="{% url 'showcategoryproducts' category.id %}">{{ category.name }}</a></button>
+        <a class="category" href="{% url 'showcategoryproducts' category.id %}">{{ category.name }}</a>
     {% endfor %}
   </nav>
   {% block content %} {% endblock %}

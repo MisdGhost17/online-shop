@@ -2,20 +2,22 @@ from django.shortcuts import render
 from cart.forms import CartAddProductForm
 from products.models import Product, ProductCategory
 from products.forms import ProductSearchForm
-from django.core.paginator import Paginator
+from cart.cart import Cart
 
 def allproducts(request):
+    cart = Cart(request)
     cart_product_form = CartAddProductForm()
     context = {
         'title': 'Shop',
         'categories': ProductCategory.objects.all(),
         'cart_product_form': cart_product_form,
+        'products_in_cart': cart.len_all_products_in_cart(),
         'cat_sort': False,
     }
     if request.method == 'POST':
         form = ProductSearchForm(data=request.POST)
         if form.is_valid():
-            context['products']= Product.objects.all()
+            context['products']= Product.objects.filter(name__icontains=form.cleaned_data['search_field'])
             context['search_form']= form
     else:
         form = ProductSearchForm()
@@ -40,7 +42,7 @@ def show_products_for_category(request, cat_id):
             context['products']= products
             context['search_form'] = form
     else:
-        context['products'] = Product.objects.all()
+        context['products'] = products
         context['search_form'] = ProductSearchForm()
     return render(request, 'products/index.html', context)
 
