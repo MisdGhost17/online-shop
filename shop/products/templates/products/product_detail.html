@@ -10,7 +10,7 @@
   <p>{{ product.price }}</p>
   <form action="{% url 'addproduct' product.id %}" method="post">
        {% csrf_token %}
-       {{ cart_product_form }}
+       {{ cart_product_form.quantity }}
        <input type="submit" value="В корзину">
   </form>
 </div>

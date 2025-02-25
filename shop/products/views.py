@@ -8,7 +8,7 @@ def allproducts(request):
     cart = Cart(request)
     cart_product_form = CartAddProductForm()
     context = {
-        'title': 'Shop',
+        'title': 'TechShop',
         'categories': ProductCategory.objects.all(),
         'cart_product_form': cart_product_form,
         'products_in_cart': cart.len_all_products_in_cart(),
@@ -29,9 +29,11 @@ def allproducts(request):
 def show_products_for_category(request, cat_id):
     category = ProductCategory.objects.get(pk=cat_id)
     products = Product.objects.filter(category=cat_id)
+    cart_product_form = CartAddProductForm()
     context = {
         'title': category.name,
         'categories': ProductCategory.objects.all(),
+        'cart_product_form': cart_product_form,
         'cat_sort': True,
         'cat_id': category.id,
     }
@@ -48,7 +50,10 @@ def show_products_for_category(request, cat_id):
 
 def product_detail(request, product_id):
     product = Product.objects.get(pk=product_id)
+    cart_product_form = CartAddProductForm()
     context = {
+        'cart_product_form': cart_product_form,
+        'categories': ProductCategory.objects.all(),
         'title': product.name,
         'product': product,
     }

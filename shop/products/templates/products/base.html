@@ -10,13 +10,12 @@
 </head>
 <body>
   <header>
-    <div class="shapka">
-    <div class="header-block logo">
-      <h1><a href = "{% url 'allproducts' %}">T</a></h1>
+    <div class="logo">
+      <h1><a href = "{% url 'allproducts' %}">TS</a></h1>
     </div>
     {% if user.is_authenticated %}
-    <div class="header-block username">
-      <p>{{ user.username }}</p>
+    <div class="header-block">
+      <p class ="username">{{ user.username }}</p>
     </div>
     <div class="header-block">
       <a href="{% url 'profileupdate' %}">Личный кабинет</a>
@@ -24,17 +23,21 @@
     <div class="header-block">
       <a href="{% url 'logout' %}">Выйти</a>
     </div>
-    <div class="header-block top-cart">
-      <a href="{% url 'cart' %}">В корзину: {{ products_in_cart }}</a>
-    </div>
+      <div class="top-cart">
+        <div class ="schetchik">
+          <p>{% if products_in_cart %}{{ products_in_cart }}{% else %}0{% endif %}</p>
+        </div>
+      </div>
+      <div class="top-cart">
+        <a href="{% url 'cart' %}">В корзине:</a>
+      </div>
     {% else %}
-    <div class="header-block">
+    <div class="header-block login">
       <a href="{% url 'login' %}">Войти</a>
     </div>
-    <div class="header-block">
+    <div class="header-block register">
        <a href="{% url 'registration' %}">Зарегистрироваться</a>
     </div>
-      </div>
     {% endif %}
   </header>
   <nav class="categories">
