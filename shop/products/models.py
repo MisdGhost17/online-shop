@@ -25,3 +25,8 @@ class ProductCategory(models.Model):
 
     def __str__(self):
         return f'Категория: {self.name}'
+
+
+class ProductImage(models.Model):
+    big_image = models.ImageField(upload_to='product')
+    product = models.ForeignKey('Product', related_name='images', on_delete=models.CASCADE)

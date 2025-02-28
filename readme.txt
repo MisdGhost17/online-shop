@@ -1,1 +1,1 @@
-Django online technical shop with BD PostgreSQL
+TechShop - Django online technical shop with BD PostgreSQL

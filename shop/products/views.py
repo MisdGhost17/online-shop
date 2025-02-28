@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from cart.forms import CartAddProductForm
-from products.models import Product, ProductCategory
+from products.models import Product, ProductCategory, ProductImage
 from products.forms import ProductSearchForm
 from cart.cart import Cart
 
@@ -51,10 +51,12 @@ def show_products_for_category(request, cat_id):
 def product_detail(request, product_id):
     product = Product.objects.get(pk=product_id)
     cart_product_form = CartAddProductForm()
+    product_images = ProductImage.objects.filter(product=product_id)
     context = {
         'cart_product_form': cart_product_form,
         'categories': ProductCategory.objects.all(),
         'title': product.name,
         'product': product,
+        'product_images': product_images,
     }
     return render(request, 'products/product_detail.html', context)
