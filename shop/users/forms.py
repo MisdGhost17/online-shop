@@ -57,13 +57,16 @@ class UserProfileChangeForm(UserChangeForm):
     }))
     email = forms.EmailField(widget=forms.EmailInput(attrs={
         'class': 'change-form-email',
+        'placeholder': 'Изменить email',
     }))
     first_name = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'change-form-first_name',
+        'placeholder': 'Изменить Имя',
     }))
     last_name = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'change-form-last_name',
+        'placeholder': 'Изменить Фамилию',
     }))
     image = forms.ImageField(widget=forms.FileInput(attrs={
-        'class': 'change-image-form'
+        'class': 'change-image-form',
     }))
