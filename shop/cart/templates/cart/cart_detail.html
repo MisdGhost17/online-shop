@@ -1,0 +1,25 @@
+{% extends 'products/base.html' %}
+{% load static %}
+{% block content %}
+  <h1>Корзина</h1>
+    <p>Всего в корзине: {{ cart.len_all_products_in_cart }}</p>
+  {% for item in cart %}
+    {% with product=item.product %}
+          <div class="product-in-cart">
+                <h1>{{ product.name }}</h1>
+                <p>Категория: {{ product.category.name }}</p>
+                <img class="product_image" src="{{ product.image.url }}"/>
+                <p>{{ product.description }}</p>
+                <p>{{ product.price }}</p>
+           </div>
+    {% endwith %}
+    <form method="post" action="{% url 'updateproduct' item.product.id %}">
+        {% csrf_token %}
+        {{ item.update_quantity_form.quantity }}
+        {{ item.update_quantity_form.override }}
+        <input type="submit" value="Обновить">
+    </form>
+    <button><a href="{% url 'removeproduct' item.product.id %}">🗑️</a></button>
+  {% endfor %}
+  <h1>Total: {{ cart.get_total_price }}</h1>
+{% endblock %}

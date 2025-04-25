@@ -1,0 +1,232 @@
+*{
+    font-family: "Roboto", serif;
+}
+.categories{
+    margin-top: 62px;
+    height: 60px;
+}
+
+.category:hover{
+    color: dimgrey;
+}
+
+.category{
+    float: left;
+    margin-left: 20px;
+}
+
+a{
+    text-decoration: None;
+    color: black;
+}
+
+header{
+    padding-top: -100px;
+    color: white;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 50px;
+    background-color: black;
+    top: 0;
+    left: 0;
+}
+
+.logo{
+    display: inline-block;
+    float: left;
+    margin-top: -20px;
+    margin-left: 10px;
+    margin-right: 40px;
+}
+.username{
+    margin-top: 0px;
+    margin-left: 10px;
+}
+.logo h1 a{
+    color: white;
+    font-size: 40px;
+}
+
+.header-block{
+    font-size: 20px;
+    display: inline-block;
+    float: left;
+    margin-top: 15px;
+    margin-left: 20px;
+}
+
+.header-block a{
+    color: white;
+}
+
+.header-block p{
+    color: white;
+}
+
+.top-cart{
+    display: inline-block;
+    float: right;
+    margin-top: 15px;
+    margin-right: 20px;
+}
+
+.top-cart a{
+    font-size: 20px;
+    color: white;
+}
+
+.top-cart p{
+    margin-top: 0;
+    font-size: 20px;
+    color: black;
+}
+.schetchik{
+    margin-left: -10px;
+    margin-top: -3px;
+    text-align: center;
+    border: 2px solid white;
+    background-color: white;
+    border-radius: 20px;
+    height: 24px;
+    width: auto;
+}
+
+.search{
+    margin-top: -20px;
+}
+
+.search input[type="text"]{
+    background-color: white;
+    color: black;
+    width: 90%;
+    height: 30px;
+    margin-left: 12px;
+    font-size: 20px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.search input[type="submit"]{
+    background-color: black;
+    color: white;
+    border: 2px solid black;
+    font-size: 20px;
+    margin-left: 10px;
+    width: 8%;
+    border-radius: 10px;
+}
+
+.search input[type="submit"]:hover{
+    background-color: white;
+    color: black;
+}
+.products{
+    margin-left: 60px;
+}
+.product{
+    display: inline-block;
+    width: 400px;
+    height: 500px;
+    margin: 30px;
+}
+
+.product_name{
+    text-align: center;
+    font-size: 10px;
+    text-align: left;
+    height: 15px;
+}
+
+.product_name:hover{
+    color: dimgrey;
+}
+
+.product_image{
+    margin: 10px 70px 0px;
+    margin-top: 0px;
+    width: 250px;
+    height: 300px;
+}
+
+.product_toptext{
+    text-align: center;
+    height: 150px;
+}
+
+.product_bottext{
+    height: 50px;
+}
+.product_cat{
+    text-align: left;
+    margin-top: -12px;
+    font-size: 15px;
+}
+
+.product_shortdesc{
+    text-align: center;
+}
+
+.buy-btn select{
+    font-size: 20px;
+    color: white;
+    background-color: black;
+    border: 2px solid black;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    margin-right: 0px;
+}
+
+.buy-btn select:hover{
+    color: black;
+    background-color: white;
+}
+.buy-btn{
+    float: right;
+    margin-top: 16px;
+    margin-right: 10px;
+}
+
+.price-text{
+    display: inline-block;
+    font-size: 38px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.buy-btn input[type="submit"]{
+    color: white;
+    background-color: black;
+    font-size: 20px;
+    border: 2px solid black;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-left: -10px;
+    margin-right: 12px;
+}
+
+.buy-btn input[type="submit"]:hover{
+    color: black;
+    background-color: white;
+}
+
+.kabinet-image{
+    display: inline-block;
+    float: left;
+    height: 450px;
+    width: 450px;
+    border-radius: 50%;
+    margin-left: 170px;
+}
+
+.kabinet-forms{
+    display: inline-block;
+    float: left;
+    margin-left: 70px;
+    margin-top: 100px;
+}
+
+.kabinet-forms p input{
+    width: 300px;
+}

@@ -1,0 +1,24 @@
+{% extends 'products/base.html' %}
+{% block content %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">
+                {{ message }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+    <form enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        <img class="kabinet-image" src="{{ user.image.url }}">
+        <div class="kabinet-forms">
+            <p class="kabinet-enter-img">{{ form.image }}</p>
+            <p class="kabinet-username">{{ form.username }}</p>
+            <p class="kabinet-email">{{ form.email }}</p>
+            <p class="kabinet-name">{{ form.first_name }}</p>
+            <p class="kabinet-lastname">{{ form.last_name }}</p>
+            <button type="submit">Подтвердить</button>
+        </div>
+    </form>
+{% endblock %}

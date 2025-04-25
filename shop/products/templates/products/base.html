@@ -1,0 +1,48 @@
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ title }}</title>
+  <link href="{% static 'css/main.css' %}" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <h1><a href = "{% url 'allproducts' %}">TS</a></h1>
+    </div>
+    {% if user.is_authenticated %}
+    <div class="header-block">
+      <a href="{% url 'profileupdate' %}">Личный кабинет: {{ user.username }}</a>
+    </div>
+    <div class="header-block">
+      <a href="{% url 'logout' %}">Выйти</a>
+    </div>
+      <div class="top-cart">
+        <div class ="schetchik">
+          <p>{% if products_in_cart %}{{ products_in_cart }}{% else %}0{% endif %}</p>
+        </div>
+      </div>
+      <div class="top-cart">
+        <a href="{% url 'cart' %}">В корзине:</a>
+      </div>
+    {% else %}
+    <div class="header-block login">
+      <a href="{% url 'login' %}">Войти</a>
+    </div>
+    <div class="header-block register">
+       <a href="{% url 'registration' %}">Зарегистрироваться</a>
+    </div>
+    {% endif %}
+  </header>
+  <nav class="categories">
+    <a class ="category" href="{% url 'allproducts' %}">Каталог</a>
+    {% for category in categories %}
+        <a class="category" href="{% url 'showcategoryproducts' category.id %}">{{ category.name }}</a>
+    {% endfor %}
+  </nav>
+  {% block content %} {% endblock %}
+</body>
+</html>

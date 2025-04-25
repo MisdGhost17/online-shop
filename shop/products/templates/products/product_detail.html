@@ -1,0 +1,19 @@
+{% extends 'products/base.html' %}
+{% load static %}
+{% block content %}
+<button><a href = "{% url 'allproducts' %}">Назад</a></button>
+<div class="product_detail">
+  <h1>{{ product.name }}</h1>
+  <p>Категория: {{ product.category.name }}</p>
+    {% for product_image in product_images %}
+        <img class="product_image" src="{{ product_image.big_image.url }}"/>
+    {% endfor %}
+  <p>{{ product.description }}</p>
+  <p>{{ product.price }}</p>
+  <form action="{% url 'addproduct' product.id %}" method="post">
+       {% csrf_token %}
+       {{ cart_product_form.quantity }}
+       <input type="submit" value="В корзину">
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'products/base.html' %}
+{% load static %}
+{% block content %}
+    <main>
+    {% if cat_sort %}
+        <form method="post" action="{% url 'search_products_in_category' cat_id %}">
+            {% csrf_token %}
+            <p class="search">{{ search_form.search_field }}<input type="submit" value="Найти"></p>
+        </form>
+    {% else %}
+        <form method="post" action="{% url 'searchproducts' %}">
+            {% csrf_token %}
+            <p class="search">{{ search_form.search_field }}<input type="submit" value="Найти"></p>
+        </form>
+    {% endif %}
+        <div class ="products">
+    {% for product in products %}
+        <div class="product">
+            <img class="product_image" src="{{ product.image.url }}"/>
+            <div class="product_toptext">
+                <a class="product_name" href="{% url 'productdetail' product.id %}"><h1>{{ product.name }}</h1></a>
+                <p class="product_cat">Категория: {{ product.category.name }}</p>
+                <p class="product_shortdesc">{{ product.short_description }}</p>
+            </div>
+            <div class ="product_bottext">
+                <p class="price-text">{{ product.price }}₽</p>
+                <div class="buy-btn">
+                    <form action="{% url 'addproduct' product.id %}" method="post">
+                    {% csrf_token %}
+                    {{ cart_product_form.quantity }}
+                <input type="submit" value="В корзину">
+            </form>
+                </div>
+            </div>
+       </div>
+    {% endfor %}
+        </div>
+    </main>
+{% endblock %}
