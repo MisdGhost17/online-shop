@@ -43,6 +43,7 @@ def cart_detail(request):
             'override': True,
         })
     context = {
+        'products_in_cart': cart.len_all_products_in_cart(),
         'cart': Cart(request),
     }
     return render(request, 'cart/cart_detail.html', context)

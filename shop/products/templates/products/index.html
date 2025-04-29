@@ -1,17 +1,21 @@
 {% extends 'products/base.html' %}
 {% load static %}
 {% block content %}
-    <main>
+    <main xmlns="http://www.w3.org/1999/html">
     {% if cat_sort %}
         <form method="post" action="{% url 'search_products_in_category' cat_id %}">
             {% csrf_token %}
-            <p class="search">{{ search_form.search_field }}<input type="submit" value="Найти"></p>
+            <div class = "search_line">
+                <p class="search">{{ search_form.search_field }}<input type="submit" value="Найти"></p>
+            </div>
         </form>
     {% else %}
-        <form method="post" action="{% url 'searchproducts' %}">
-            {% csrf_token %}
-            <p class="search">{{ search_form.search_field }}<input type="submit" value="Найти"></p>
-        </form>
+        <div class = "search-line">
+            <form method="post" action="{% url 'searchproducts' %}">
+                {% csrf_token %}
+                    <p class="search">{{ search_form.search_field }}<input type="submit" value="🔍"></p>
+            </form>
+        </div>
     {% endif %}
         <div class ="products">
     {% for product in products %}

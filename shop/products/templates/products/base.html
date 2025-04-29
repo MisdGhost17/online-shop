@@ -11,7 +11,7 @@
 <body>
   <header>
     <div class="logo">
-      <h1><a href = "{% url 'allproducts' %}">TS</a></h1>
+      <h1><a href = "{% url 'allproducts' %}">tstore:</a></h1>
     </div>
     {% if user.is_authenticated %}
     <div class="header-block">
@@ -21,12 +21,18 @@
       <a href="{% url 'logout' %}">Выйти</a>
     </div>
       <div class="top-cart">
-        <div class ="schetchik">
-          <p>{% if products_in_cart %}{{ products_in_cart }}{% else %}0{% endif %}</p>
-        </div>
-      </div>
-      <div class="top-cart">
-        <a href="{% url 'cart' %}">В корзине:</a>
+        <a href="{% url 'cart' %}"><img src="{% static "img/free-icon-shopping-cart-711897.png" %}">
+        {% if products_in_cart <= 99 and products_in_cart > 0%}
+            <div class="schetchik">
+                <p>{{ products_in_cart }}</p>
+            </div>
+        {% endif %}
+        {% if products_in_cart > 99 %}
+            <div class="schetchik">
+                <p>99</p>
+            </div>
+        {% endif %}
+        </a>
       </div>
     {% else %}
     <div class="header-block login">

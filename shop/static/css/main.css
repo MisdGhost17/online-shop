@@ -1,9 +1,10 @@
+{% static %}
 *{
     font-family: "Roboto", serif;
 }
 .categories{
     margin-top: 62px;
-    height: 60px;
+    height: 20px;
 }
 
 .category:hover{
@@ -36,9 +37,10 @@ header{
 .logo{
     display: inline-block;
     float: left;
-    margin-top: -20px;
-    margin-left: 10px;
+    margin-top: -10px;
+    margin-left: 20px;
     margin-right: 40px;
+    text-align: center;
 }
 .username{
     margin-top: 0px;
@@ -46,7 +48,7 @@ header{
 }
 .logo h1 a{
     color: white;
-    font-size: 40px;
+    font-size: 25px;
 }
 
 .header-block{
@@ -68,8 +70,9 @@ header{
 .top-cart{
     display: inline-block;
     float: right;
-    margin-top: 15px;
+    margin-top: 10px;
     margin-right: 20px;
+
 }
 
 .top-cart a{
@@ -77,50 +80,54 @@ header{
     color: white;
 }
 
-.top-cart p{
-    margin-top: 0;
-    font-size: 20px;
-    color: black;
+.top-cart a img{
+    height: 35px;
+    width: 35px;
+
 }
 .schetchik{
-    margin-left: -10px;
-    margin-top: -3px;
-    text-align: center;
-    border: 2px solid white;
     background-color: white;
     border-radius: 20px;
-    height: 24px;
-    width: auto;
+    border: 2px solid white;
+    height: 16px;
+    width: 18px;
+    text-align: center;
+    color: black;
+    margin-top: -40px;
+    margin-left: 23px;
 }
-
+.schetchik p{
+    font-size: 14px;
+    margin-top: 0px;
+}
 .search{
     margin-top: -20px;
 }
 
 .search input[type="text"]{
-    background-color: white;
-    color: black;
-    width: 90%;
+    background-color: #f0f0f5;
+    width: 95%;
     height: 30px;
-    margin-left: 12px;
     font-size: 20px;
-    border: 2px solid black;
     border-radius: 5px;
+    border: None;
 }
 
 .search input[type="submit"]{
-    background-color: black;
-    color: white;
-    border: 2px solid black;
+    border: None;
     font-size: 20px;
     margin-left: 10px;
-    width: 8%;
+    width: 3%;
     border-radius: 10px;
 }
 
-.search input[type="submit"]:hover{
-    background-color: white;
-    color: black;
+.search-line{
+    margin-top: 30px;
+    border: None;
+    background-color: #f0f0f5;
+    border-radius: 5px;
+    height: 30px;
+
 }
 .products{
     margin-left: 60px;
@@ -163,6 +170,7 @@ header{
     margin-top: -12px;
     font-size: 15px;
 }
+
 
 .product_shortdesc{
     text-align: center;
