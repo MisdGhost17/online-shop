@@ -42,13 +42,32 @@
        <a href="{% url 'registration' %}">Зарегистрироваться</a>
     </div>
     {% endif %}
-  </header>
+  {% if cat_sort %}
+        <div class = "search-line">
+        <form method="post" action="{% url 'search_products_in_category' cat_id %}">
+            {% csrf_token %}
+                <p class="search">{{ search_form.search_field }}<input type="submit" value="🔍"></p>
+        </form>
+        </div>
+    {% else %}
+        <div class = "search-line">
+            <form method="post" action="{% url 'searchproducts' %}">
+                {% csrf_token %}
+                    <p class="search">{{ search_form.search_field }}<input type="submit" value="🔍"></p>
+            </form>
+        </div>
+    {% endif %}
   <nav class="categories">
-    <a class ="category" href="{% url 'allproducts' %}">Каталог</a>
+    <div class="category">
+        <a href="{% url 'allproducts' %}">Каталог</a>
+    </div>
     {% for category in categories %}
-        <a class="category" href="{% url 'showcategoryproducts' category.id %}">{{ category.name }}</a>
+        <div class="category">
+            <a href="{% url 'showcategoryproducts' category.id %}">{{ category.name }}</a>
+        </div>
     {% endfor %}
   </nav>
+  </header>
   {% block content %} {% endblock %}
 </body>
 </html>

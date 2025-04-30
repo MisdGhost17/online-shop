@@ -1,25 +1,50 @@
 {% extends 'products/base.html' %}
 {% load static %}
 {% block content %}
-  <h1>Корзина</h1>
-    <p>Всего в корзине: {{ cart.len_all_products_in_cart }}</p>
+    <div class="cart-left">
+    <div class="cart-top">
+        <h1 class="cart-name">Корзина </h1>
+        <h1 class="cart-len-items">{{ cart.len_all_products_in_cart }}</h1>
+    </div>
   {% for item in cart %}
     {% with product=item.product %}
           <div class="product-in-cart">
-                <h1>{{ product.name }}</h1>
-                <p>Категория: {{ product.category.name }}</p>
-                <img class="product_image" src="{{ product.image.url }}"/>
-                <p>{{ product.description }}</p>
-                <p>{{ product.price }}</p>
+                    <img class="product-in-cart-image" src="{{ product.image.url }}"/>
+                    <div class="product-in-cart-name">
+                        <a class="product-in-cart-name-name" href="{% url 'productdetail' product.id %}">{{ product.name }}</a>
+                        <p class="product-in-cart-id">ID: {{ product.id }}</p>
+                    </div>
+                    <div class="product-in-cart-form-price">
+                    <form class="product-in-cart-form" method="post" action="{% url 'updateproduct' item.product.id %}">
+                        {% csrf_token %}
+                        {{ item.update_quantity_form.quantity }}
+                        {{ item.update_quantity_form.override }}
+                        <a href="{% url 'cart' %}"type="submit"><input class="product-in-cart-input" type="submit" value="Изменить"></a>
+                    </form>
+                    </div>
+                    <p class="product-in-cart-price">{{ product.price }} ₽</p>
+                    <a class="remove-btn-in-cart" href="{% url 'removeproduct' item.product.id %}"><img src="{% static 'img/free-icon-cross-mark-7420933.png' %}"></a>
            </div>
     {% endwith %}
-    <form method="post" action="{% url 'updateproduct' item.product.id %}">
-        {% csrf_token %}
-        {{ item.update_quantity_form.quantity }}
-        {{ item.update_quantity_form.override }}
-        <input type="submit" value="Обновить">
-    </form>
-    <button><a href="{% url 'removeproduct' item.product.id %}">🗑️</a></button>
   {% endfor %}
-  <h1>Total: {{ cart.get_total_price }}</h1>
+    </div>
+    <div class="cart-right">
+        <div class="cart-right-top-block">
+            {% if cart.len_all_products_in_cart >= 5 %}
+                <p>{{ cart.len_all_products_in_cart }} товаров на сумму {{ cart.get_total_price }} ₽</p>
+            {% endif %}
+            {% if cart.len_all_products_in_cart == 1 %}
+                <p>{{ cart.len_all_products_in_cart }} товар на сумму {{ cart.get_total_price }} ₽</p>
+            {% endif %}
+            {% if cart.len_all_products_in_cart > 1 and cart.len_all_products_in_cart < 5 %}
+                <p>{{ cart.len_all_products_in_cart }} товара на сумму {{ cart.get_total_price }} ₽</p>
+            {% endif %}
+        </div>
+        <div class="cart-right-bottom-block">
+             <p>К оплате: {{ cart.get_total_price }} ₽</p>
+            <div class="confirm-btn">
+                <a href="">Оформить заказ</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

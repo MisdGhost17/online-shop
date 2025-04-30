@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from products.models import Product
+from products.models import Product, ProductCategory
+from products.forms import ProductSearchForm
 
 from .cart import Cart
 from .forms import CartAddProductForm
@@ -36,6 +37,8 @@ def update_product(request, product_id):
 
 @login_required(login_url='login')
 def cart_detail(request):
+    form = ProductSearchForm(data=request.POST)
+    categories = ProductCategory.objects.all()
     cart = Cart(request)
     for item in cart:
         item['update_quantity_form'] = CartAddProductForm(initial={
@@ -45,5 +48,8 @@ def cart_detail(request):
     context = {
         'products_in_cart': cart.len_all_products_in_cart(),
         'cart': Cart(request),
+        'categories': categories,
+        'cat_sort': False,
+        'search_form': form,
     }
     return render(request, 'cart/cart_detail.html', context)

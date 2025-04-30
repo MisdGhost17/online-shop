@@ -1,33 +1,21 @@
 {% extends 'products/base.html' %}
 {% load static %}
 {% block content %}
-    <main xmlns="http://www.w3.org/1999/html">
-    {% if cat_sort %}
-        <form method="post" action="{% url 'search_products_in_category' cat_id %}">
-            {% csrf_token %}
-            <div class = "search_line">
-                <p class="search">{{ search_form.search_field }}<input type="submit" value="Найти"></p>
-            </div>
-        </form>
-    {% else %}
-        <div class = "search-line">
-            <form method="post" action="{% url 'searchproducts' %}">
-                {% csrf_token %}
-                    <p class="search">{{ search_form.search_field }}<input type="submit" value="🔍"></p>
-            </form>
-        </div>
-    {% endif %}
+    <main>
         <div class ="products">
     {% for product in products %}
         <div class="product">
-            <img class="product_image" src="{{ product.image.url }}"/>
+            <div class="div_above_the_image">
+                <p></p>
+            </div>
+            <div class="div_product_image">
+                <img class="product_image" src="{{ product.image.url }}"/>
+            </div>
             <div class="product_toptext">
-                <a class="product_name" href="{% url 'productdetail' product.id %}"><h1>{{ product.name }}</h1></a>
-                <p class="product_cat">Категория: {{ product.category.name }}</p>
-                <p class="product_shortdesc">{{ product.short_description }}</p>
+                <a class="product_name" href="{% url 'productdetail' product.id %}"><p>{{ product.name }}</p></a>
             </div>
             <div class ="product_bottext">
-                <p class="price-text">{{ product.price }}₽</p>
+                <p class="price-text">{{ product.price }} ₽</p>
                 <div class="buy-btn">
                     <form action="{% url 'addproduct' product.id %}" method="post">
                     {% csrf_token %}
