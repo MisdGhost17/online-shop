@@ -2,18 +2,33 @@
 {% load static %}
 {% block content %}
 <button><a href = "{% url 'allproducts' %}">Назад</a></button>
-<div class="product_detail">
-  <h1>{{ product.name }}</h1>
-  <p>Категория: {{ product.category.name }}</p>
-    {% for product_image in product_images %}
-        <img class="product_image" src="{{ product_image.big_image.url }}"/>
-    {% endfor %}
-  <p>{{ product.description }}</p>
-  <p>{{ product.price }}</p>
-  <form action="{% url 'addproduct' product.id %}" method="post">
-       {% csrf_token %}
-       {{ cart_product_form.quantity }}
-       <input type="submit" value="В корзину">
-  </form>
+<div class="product-detail">
+    <div class="product-detail-top">
+        <div class="product-detail-left">
+            <img src="{{ product.image.url }}">
+            <div class="product-detail-other-images">
+            {% for product_image in product_images %}
+                <div class="product-detail-other-image">
+                    <img class="product-image" src="{{ product_image.big_image.url }}"/>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+        <div class="product-detail-right">
+            <h1 class="product-detail-name">{{ product.name }}</h1>
+            <p class="product-detail-category">Категория: {{ product.category.name }}</p>
+            <p class="product-detail-description">{{ product.description }}</p>
+            <div class="product-detail-price-buy">
+              <p class="product-detail-price">{{ product.price }} ₽</p>
+                <div class="product-detail-buy-btn">
+                    <form action="{% url 'addproduct' product.id %}" method="post">
+                   {% csrf_token %}
+                   {{ cart_product_form.quantity }}
+                   <input type="submit" value="В корзину">
+              </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

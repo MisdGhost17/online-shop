@@ -61,5 +61,6 @@ def product_detail(request, product_id):
         'title': product.name,
         'product': product,
         'product_images': product_images,
+        'search_form': ProductSearchForm(),
     }
     return render(request, 'products/product_detail.html', context)
