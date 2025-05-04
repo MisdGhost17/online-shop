@@ -5,7 +5,9 @@
 <div class="product-detail">
     <div class="product-detail-top">
         <div class="product-detail-left">
-            <img src="{{ product.image.url }}">
+            <div class="product-detail-left-div-for-img">
+                <img src="{{ product.image.url }}">
+            </div>
             <div class="product-detail-other-images">
             {% for product_image in product_images %}
                 <div class="product-detail-other-image">

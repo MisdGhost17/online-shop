@@ -20,11 +20,11 @@ def allproducts(request):
     if request.method == 'POST':
         form = ProductSearchForm(data=request.POST)
         if form.is_valid():
-            context['products']= Product.objects.filter(name__icontains=form.cleaned_data['search_field'])
+            context['products']= Product.objects.filter(name__icontains=form.cleaned_data['search_field']).order_by('created')
             context['search_form']= form
     else:
         form = ProductSearchForm()
-        context['products'] = Product.objects.all()
+        context['products'] = Product.objects.all().order_by('created')
         context['search_form'] = form
     return render(request, 'products/index.html', context)
 

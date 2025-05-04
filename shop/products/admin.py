@@ -14,7 +14,7 @@ class ProductImageInline(admin.StackedInline):
 
 class ProductAdmin(admin.ModelAdmin):
   inlines = [ProductImageInline,]
+  readonly_fields = ['created',]
 
-admin.site.register(ProductImage, ProductImageAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductCategory)

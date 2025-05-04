@@ -1,14 +1,15 @@
+from datetime import datetime
+
 from django.db import models
 
 # Create your models here.
 class Product(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='product')
-    short_description = models.CharField(max_length=120, blank=True)
     description = models.TextField(null=True, blank=True, default='')
     price = models.PositiveIntegerField()
     category = models.ForeignKey('ProductCategory', on_delete=models.PROTECT)
-
+    created = models.DateTimeField(auto_now_add=True)
     class Meta:
         verbose_name = 'Product'
         verbose_name_plural = 'Products'
