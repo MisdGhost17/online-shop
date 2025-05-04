@@ -19,7 +19,6 @@ class Product(models.Model):
 
 class ProductCategory(models.Model):
     name = models.CharField(max_length=50)
-
     class Meta:
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
@@ -31,3 +30,8 @@ class ProductCategory(models.Model):
 class ProductImage(models.Model):
     big_image = models.ImageField(upload_to='product')
     product = models.ForeignKey('Product', related_name='images', on_delete=models.CASCADE)
+
+class ProductCharacteristics(models.Model):
+    name = models.CharField(max_length=20)
+    text = models.CharField(max_length=20)
+    product = models.ForeignKey('Product', related_name='characteristics', on_delete=models.CASCADE)

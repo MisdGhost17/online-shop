@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from cart.forms import CartAddProductForm
-from products.models import Product, ProductCategory, ProductImage
+from products.models import Product, ProductCategory, ProductImage, ProductCharacteristics
 from products.forms import ProductSearchForm
 from cart.cart import Cart
 
@@ -55,6 +55,7 @@ def product_detail(request, product_id):
     product = Product.objects.get(pk=product_id)
     cart_product_form = CartAddProductForm()
     product_images = ProductImage.objects.filter(product=product_id)
+    product_characteristics = ProductCharacteristics.objects.filter(product=product_id)
     context = {
         'cart_product_form': cart_product_form,
         'categories': ProductCategory.objects.all(),
@@ -62,5 +63,6 @@ def product_detail(request, product_id):
         'product': product,
         'product_images': product_images,
         'search_form': ProductSearchForm(),
+        'product_characteristics': product_characteristics,
     }
     return render(request, 'products/product_detail.html', context)

@@ -1,9 +1,9 @@
-from products.models import Product, ProductCategory,ProductImage
+from products.models import Product, ProductCategory, ProductImage, ProductCharacteristics
 from django.contrib import admin
 
-
-class ProductImageAdmin(admin.ModelAdmin):
-  pass
+class ProductCharacteristicsInline(admin.StackedInline):
+  model = ProductCharacteristics
+  extra = 0
 
 
 class ProductImageInline(admin.StackedInline):
@@ -13,7 +13,7 @@ class ProductImageInline(admin.StackedInline):
 
 
 class ProductAdmin(admin.ModelAdmin):
-  inlines = [ProductImageInline,]
+  inlines = [ProductImageInline, ProductCharacteristicsInline,]
   readonly_fields = ['created',]
 
 admin.site.register(Product, ProductAdmin)
