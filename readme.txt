@@ -1,1 +1,1 @@
-tstore: - Django online technical shop with BD PostgreSQL
+tstore: - Django online technical shop with DB PostgreSQL
