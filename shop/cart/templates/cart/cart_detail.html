@@ -1,11 +1,12 @@
 {% extends 'products/base.html' %}
 {% load static %}
 {% block content %}
-    <div class="cart-left">
-    <div class="cart-top">
-        <h1 class="cart-name">Корзина </h1>
-        <h1 class="cart-len-items">{{ cart.len_all_products_in_cart }}</h1>
-    </div>
+  {% if cart.len_all_products_in_cart > 0 %}
+      <div class="cart-left">
+      <div class="cart-top">
+         <h1 class="cart-name">Корзина </h1>
+         <h1 class="cart-len-items">{{ cart.len_all_products_in_cart }}</h1>
+      </div>
   {% for item in cart %}
     {% with product=item.product %}
           <div class="product-in-cart">
@@ -22,7 +23,7 @@
                         <a href="{% url 'cart' %}"type="submit"><input class="product-in-cart-input" type="submit" value="Изменить"></a>
                     </form>
                     </div>
-                    <p class="product-in-cart-price">{{ product.price }} ₽</p>
+                    <p class="product-in-cart-price">{{ item.total_price }} ₽</p>
                     <a class="remove-btn-in-cart" href="{% url 'removeproduct' item.product.id %}"><img src="{% static 'img/free-icon-cross-mark-7420933.png' %}"></a>
            </div>
     {% endwith %}
@@ -47,4 +48,12 @@
             </div>
         </div>
     </div>
+    {% else %}
+      <div class="cart-is-empty">
+          <img src="{% static "img/free-icon-sad-6398260.png" %}"/>
+          <h1>Ваша корзина пуста</h1>
+          <p>Самое время добавить в нее что-нибудь</p>
+          <a href = {% url 'allproducts'%}>Перейти в каталог</a>
+      </div>
+    {% endif %}
 {% endblock %}

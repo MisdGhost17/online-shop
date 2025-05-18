@@ -13,35 +13,6 @@
     <div class="logo">
       <h1><a href = "{% url 'allproducts' %}">tstore:</a></h1>
     </div>
-    {% if user.is_authenticated %}
-    <div class="header-block">
-      <a href="{% url 'profileupdate' %}">Личный кабинет: {{ user.username }}</a>
-    </div>
-    <div class="header-block">
-      <a href="{% url 'logout' %}">Выйти</a>
-    </div>
-      <div class="top-cart">
-        <a href="{% url 'cart' %}"><img src="{% static "img/free-icon-shopping-cart-711897.png" %}">
-        {% if products_in_cart <= 99 and products_in_cart > 0%}
-            <div class="schetchik">
-                <p>{{ products_in_cart }}</p>
-            </div>
-        {% endif %}
-        {% if products_in_cart > 99 %}
-            <div class="schetchik">
-                <p>99</p>
-            </div>
-        {% endif %}
-        </a>
-      </div>
-    {% else %}
-    <div class="header-block login">
-      <a href="{% url 'login' %}">Войти</a>
-    </div>
-    <div class="header-block register">
-       <a href="{% url 'registration' %}">Зарегистрироваться</a>
-    </div>
-    {% endif %}
   {% if cat_sort %}
         <div class = "search-line">
         <form method="post" action="{% url 'search_products_in_category' cat_id %}">
@@ -56,6 +27,29 @@
                     <p class="search">{{ search_form.search_field }}<input type="submit" value="🔍"></p>
             </form>
         </div>
+    {% endif %}
+    {% if user.is_authenticated %}
+      <div class="top-cart">
+        <a href="{% url 'cart' %}"><img src="{% static "img/free-icon-shopping-cart-711897.png" %}">
+        {% if products_in_cart <= 99 and products_in_cart > 0%}
+            <div class="schetchik">
+                <p>{{ products_in_cart }}</p>
+            </div>
+        {% endif %}
+        {% if products_in_cart > 99 %}
+            <div class="schetchik">
+                <p>99</p>
+            </div>
+        {% endif %}
+        </a>
+      </div>
+        <div class="profile-img">
+      <a href="{% url 'profileupdate' %}"><img src="{% static "img/free-icon-user-profile-2734847.png" %}"></a>
+    </div>
+    {% else %}
+    <div class="header-block login">
+      <a href="{% url 'login' %}">Войти/Зарегистрироваться</a>
+    </div>
     {% endif %}
   <nav class="categories">
     <div class="category">

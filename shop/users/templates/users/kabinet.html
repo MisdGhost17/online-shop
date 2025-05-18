@@ -1,5 +1,7 @@
 {% extends 'products/base.html' %}
+{% load static %}
 {% block content %}
+    <div class="kabinet">
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
@@ -8,17 +10,36 @@
             </li>
         {% endfor %}
     </ul>
-{% endif %}
+    {% endif %}
     <form enctype="multipart/form-data" method="post">
         {% csrf_token %}
         <img class="kabinet-image" src="{{ user.image.url }}">
         <div class="kabinet-forms">
-            <p class="kabinet-enter-img">{{ form.image }}</p>
-            <p class="kabinet-username">{{ form.username }}</p>
-            <p class="kabinet-email">{{ form.email }}</p>
-            <p class="kabinet-name">{{ form.first_name }}</p>
-            <p class="kabinet-lastname">{{ form.last_name }}</p>
-            <button type="submit">Подтвердить</button>
+            <div class="kabinet-top">
+                <div class="div-kabinet-username">
+                <p class="kabinet-username">{{ user.username }}</p>
+            </div>
+            <div class="btn-logout">
+                  <a href="{% url 'logout' %}"><img src="{% static "img/free-icon-exit-1286969.png" %}"/></a>
+            </div>
+            </div>
+            <div class="user-contact-information">
+                <p class="contact-text">Контактная информация:</p>
+                <p class="kabinet-uplabel">Имя:</p>
+                <p class="kabinet-name">{{ form.first_name }}</p>
+                <p class="kabinet-uplabel">Фамилия:</p>
+                <p class="kabinet-lastname">{{ form.last_name }}</p>
+                <p class="kabinet-uplabel"> Email:</p>
+                <p class="kabinet-email">{{ form.email }}</p>
+                <div class="div-kabinet-enter-img">
+                    <label class="change-image-label" for="id_image">Выберите изображение</label>
+                </div>
+                {{ form.image }}
+            </div>
+            <div class="kabinet-submit-btn">
+                <button type="submit">Подтвердить изменения</button>
+            </div>
         </div>
     </form>
+    </div>
 {% endblock %}

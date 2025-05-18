@@ -1,11 +1,14 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth, messages
+
+from cart.cart import Cart
 from users.forms import UserLoginForm, UserRegisterForm, UserProfileChangeForm
 from django.urls import reverse
 from .models import User
 
-
+from products.forms import ProductSearchForm
+from products.models import ProductCategory
 
 def login(request):
     if request.method == 'POST':
@@ -56,12 +59,20 @@ def logout(request):
 
 @login_required(login_url='login')
 def update(request):
+    cart = Cart(request)
     if request.method == 'POST':
         form = UserProfileChangeForm(data=request.POST, instance=request.user, files=request.FILES)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('allproducts'))
+            return HttpResponseRedirect(reverse('profileupdate'))
+        else:
+            print(form.errors)
     else:
         form = UserProfileChangeForm(instance=request.user)
-    context = {'form': form}
+    context = {
+        'form': form,
+        'search_form': ProductSearchForm(),
+        'categories': ProductCategory.objects.all(),
+        'products_in_cart' : cart.len_all_products_in_cart(),
+    }
     return render(request, 'users/kabinet.html', context)

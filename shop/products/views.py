@@ -30,6 +30,7 @@ def allproducts(request):
 
 
 def show_products_for_category(request, cat_id):
+    cart = Cart(request)
     category = ProductCategory.objects.get(pk=cat_id)
     products = Product.objects.filter(category=cat_id)
     cart_product_form = CartAddProductForm()
@@ -39,6 +40,7 @@ def show_products_for_category(request, cat_id):
         'cart_product_form': cart_product_form,
         'cat_sort': True,
         'cat_id': category.id,
+        'products_in_cart': cart.len_all_products_in_cart(),
     }
     if request.method == 'POST':
         form = ProductSearchForm(data=request.POST)

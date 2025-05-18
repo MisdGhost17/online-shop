@@ -49,12 +49,7 @@ class UserRegisterForm(UserCreationForm):
 class UserProfileChangeForm(UserChangeForm):
     class Meta:
         model = User
-        fields = ('username', 'email', 'last_name', 'first_name', 'image',)
-
-    username = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'change-form-username',
-        'readonly': True,
-    }))
+        fields = ('first_name', 'last_name', 'email', 'image',)
     email = forms.EmailField(widget=forms.EmailInput(attrs={
         'class': 'change-form-email',
         'placeholder': 'Изменить email',

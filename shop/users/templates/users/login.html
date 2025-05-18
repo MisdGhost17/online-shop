@@ -1,25 +1,47 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>{{ title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
 </head>
 <body>
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li class="{{ message.tags }}">
-                {{ message }}
-            </li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    <form method="post">
-        {% csrf_token %}
-        <p>{{ form.username }}</p>
-        <p>{{ form.password }}</p>
-        <button type="submit">Войти</button>
-        <p>Нет аккаунта? <a href = '{% url "registration" %}'>Зарегистрируйтесь</a></p>
-    </form>
+    <div class="parent-login-form">
+    <div class="login-form">
+         <div class="login-left-side">
+            <p>tstore:</p>
+        </div>
+        <div class="login-right-side">
+            <p class="login-top-text">Вход</p>
+            <div class="login-post-form">
+                <form method="post">
+                    {% csrf_token %}
+                    <p class="login-login-text">Логин:</p>
+                    <p>{{ form.username }}</p>
+                    <div class="login-password-text">
+                        <p>Пароль:</p>
+                        <a href="#" class="forgot-password-text">Забыли пароль?</a>
+                    </div>
+                    <p>{{ form.password }}</p>
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li class="{{ message.tags }}">
+                                {{ message }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    <button type="submit">Войти</button>
+                    <a href = '{% url "registration" %}' class="login-logreg-text">Нет аккаунта? Зарегистрируйтесь</a>
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
 </body>
 </html>
