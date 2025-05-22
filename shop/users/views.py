@@ -42,6 +42,7 @@ def registration(request):
                 form.save()
                 return HttpResponseRedirect(reverse('login'))
             else:
+                messages.error(request, form.errors)
                 messages.error(request, 'Please correct the error below.')
                 return HttpResponseRedirect(reverse('registration'))
         else:

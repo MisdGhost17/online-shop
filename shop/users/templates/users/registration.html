@@ -1,31 +1,53 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>{{ title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
 </head>
 <body>
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li class="{{ message.tags }}">
-                {{ message }}
-            </li>
-        {% endfor %}
-    </ul>
-{% endif %}
-    <form enctype="multipart/form-data" method="post">
-        {% csrf_token %}
-        <img src="{{ user.image.url }}">
-        <p>{{ form.image }}</p>
-        <p>{{ form.username }}</p>
-        <p>{{ form.email }}</p>
-        <p>{{ form.first_name }}</p>
-        <p>{{ form.last_name }}</p>
-        <p>{{ form.password1 }}</p>
-        <p>{{ form.password2 }}</p>
-        <button type="submit">Подтвердить</button>
-        <p>Есть аккаунт? <a href = "{% url 'login' %}">Войти</a></p>
-    </form>
+    <div class="div-registration">
+        <div class="div-registration-form">
+        <div class="registration-tstore-text">
+            <h1>tstore: Регистрация</h1>
+        </div>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">
+                        {{ message }}
+                    </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+                <form enctype="multipart/form-data" method="post">
+                    <div class="registration-sides">
+                <div class="div-registration-left-side">
+                    {% csrf_token %}
+                    <p class="registration-text">Логин:</p>
+                    <p>{{ form.username }}</p>
+                    <p class="registration-text">Имя:</p>
+                    <p>{{ form.first_name }}</p>
+                    <p class="registration-text">Пароль:</p>
+                    <p>{{ form.password1 }}</p>
+                </div>
+                <div class="registartion-right-side">
+                    <p class="registration-text">Email:</p>
+                    <p>{{ form.email }}</p>
+                    <p class="registration-text">Фамилия:</p>
+                    <p>{{ form.last_name }}</p>
+                    <p class="registration-text">Повторите пароль:</p>
+                    <p>{{ form.password2 }}</p>
+                </div>
+                </div>
+            <button class="registration-submit-btn" type="submit">Зарегистрироваться</button>
+            </form>
+            <a class="a-from-reg-to-log" href = "{% url 'login' %}">Есть аккаунт? Войти</a>
+        </div>
+    </div>
 </body>
 </html>
