@@ -32,5 +32,10 @@
             </div>
         </div>
     </div>
+    <div class="product-characteristics">
+        {% for character in product_characteristics %}
+            <p>{{ character.name }} : {{ character.text }}</p>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
