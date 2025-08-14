@@ -32,9 +32,14 @@
             </div>
         </div>
     </div>
-    <div class="product-characteristics">
+    <button hx-get="{% url 'getcharacteristics' product.id %}" hx-target="#product-dinamic-div" hx-swap="innerHTML">Характеристики</button>
+    <button hx-get="{% url 'getdescription' product.id %}" hx-target="#product-dinamic-div" hx-swap="innerHTML">Описание</button>
+    <div id="product-dinamic-div">
         {% for character in product_characteristics %}
-            <p>{{ character.name }} : {{ character.text }}</p>
+            <div class="product-characteristics">
+                <p>{{ character.name }}</p>
+                <p>{{ character.text }}</p>
+            </div>
         {% endfor %}
     </div>
 </div>

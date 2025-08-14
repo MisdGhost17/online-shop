@@ -11,7 +11,7 @@ def allproducts(request):
     cart = Cart(request)
     cart_product_form = CartAddProductForm()
     context = {
-        'title': 'TechShop',
+        'title': 'tstore',
         'categories': ProductCategory.objects.all(),
         'cart_product_form': cart_product_form,
         'products_in_cart': cart.len_all_products_in_cart(),
@@ -68,3 +68,17 @@ def product_detail(request, product_id):
         'product_characteristics': product_characteristics,
     }
     return render(request, 'products/product_detail.html', context)
+
+def get_char_by_id(request, product_id):
+    product_characteristics = ProductCharacteristics.objects.filter(product=product_id)
+    context = {
+        'product_characteristics': product_characteristics,
+    }
+    return render(request, 'products/product_char.html', context)
+
+def get_description_by_id(request, product_id):
+    product_description = Product.objects.get(pk=product_id).description
+    context = {
+        'product_description': product_description,
+    }
+    return render(request, 'products/product_description.html', context)

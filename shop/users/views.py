@@ -71,6 +71,7 @@ def update(request):
     else:
         form = UserProfileChangeForm(instance=request.user)
     context = {
+        'title' : "Личный кабинет",
         'form': form,
         'search_form': ProductSearchForm(),
         'categories': ProductCategory.objects.all(),

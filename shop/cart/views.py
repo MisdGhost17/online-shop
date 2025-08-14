@@ -46,6 +46,7 @@ def cart_detail(request):
             'override': True,
         })
     context = {
+        'title': "Корзина",
         'products_in_cart': cart.len_all_products_in_cart(),
         'cart': Cart(request),
         'categories': categories,
