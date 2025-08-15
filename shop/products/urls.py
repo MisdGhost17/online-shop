@@ -1,7 +1,7 @@
 from django.shortcuts import redirect
 from django.urls import path
 from products.views import allproducts, show_products_for_category, product_detail, redirect_to_allproducts, \
-    get_char_by_id, get_description_by_id
+    get_char_by_id, get_description_by_id, get_dinamic_image
 from cart.views import add_product, remove_product, cart_detail, update_product
 
 
@@ -18,4 +18,5 @@ urlpatterns = [
     path('category/<int:cat_id>/', show_products_for_category ,name='showcategoryproducts'),
     path('getcharacteristics=<int:product_id>/', get_char_by_id , name='getcharacteristics'),
     path('getdescription=<int:product_id>/', get_description_by_id , name='getdescription'),
+    path('dimnamicimage=<int:image_id>/', get_dinamic_image, name='getdinamicimage'),
 ]

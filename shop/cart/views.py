@@ -15,7 +15,7 @@ def add_product(request, product_id):
         cart.add(product,
                  quantity=form.cleaned_data['quantity'],
                  override_quantity=form.cleaned_data['override'])
-    return redirect('allproducts')
+    return redirect('productdetail', product_id=product.id)
 
 @login_required(login_url='login')
 def remove_product(request, product_id):

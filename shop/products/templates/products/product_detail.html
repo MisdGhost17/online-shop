@@ -5,12 +5,12 @@
 <div class="product-detail">
     <div class="product-detail-top">
         <div class="product-detail-left">
-            <div class="product-detail-left-div-for-img">
+            <div id="div-dinamic-image" class="product-detail-left-div-for-img">
                 <img src="{{ product.image.url }}">
             </div>
             <div class="product-detail-other-images">
             {% for product_image in product_images %}
-                <div class="product-detail-other-image">
+                <div hx-trigger="mouseenter" hx-swap="innerhtml" hx-target="#div-dinamic-image" hx-get="/dimnamicimage={{ product_image.id }}/" class="product-detail-other-image">
                     <img class="product-image" src="{{ product_image.big_image.url }}"/>
                 </div>
             {% endfor %}
@@ -19,7 +19,7 @@
         <div class="product-detail-right">
             <h1 class="product-detail-name">{{ product.name }}</h1>
             <p class="product-detail-category">Категория: {{ product.category.name }}</p>
-            <p class="product-detail-description">{{ product.description }}</p>
+{#            <p class="product-detail-description">{{ product.short_description }}</p>#}
             <div class="product-detail-price-buy">
               <p class="product-detail-price">{{ product.price }} ₽</p>
                 <div class="product-detail-buy-btn">
@@ -32,15 +32,27 @@
             </div>
         </div>
     </div>
-    <button hx-get="{% url 'getcharacteristics' product.id %}" hx-target="#product-dinamic-div" hx-swap="innerHTML">Характеристики</button>
-    <button hx-get="{% url 'getdescription' product.id %}" hx-target="#product-dinamic-div" hx-swap="innerHTML">Описание</button>
-    <div id="product-dinamic-div">
+<div class="ch-des-section">
+    <div class="detail-btn-section">
+        <div class="char-btn-div">
+            <button class="char-btn" hx-get="{% url 'getcharacteristics' product.id %}" hx-target="#product-dinamic-div" hx-swap="innerHTML">Характеристики</button>
+        </div>
+        <div class="des-btn-div">
+            <button class="des-btn" hx-get="{% url 'getdescription' product.id %}" hx-target="#product-dinamic-div" hx-swap="innerHTML">Описание</button>
+        </div>
+    </div>
+    <div class="product-dinamic-div" id="product-dinamic-div">
         {% for character in product_characteristics %}
             <div class="product-characteristics">
-                <p>{{ character.name }}</p>
-                <p>{{ character.text }}</p>
+            <div class="char-left">
+                <span class="char-name">{{ character.name }}</span>
+            </div>
+            <div class="char-right">
+                <span class="char-text">{{ character.text }}</span>
+            </div>
             </div>
         {% endfor %}
+    </div>
     </div>
 </div>
 {% endblock %}

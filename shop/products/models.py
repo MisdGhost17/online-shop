@@ -5,6 +5,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='product')
     description = models.TextField(null=True, blank=True, default='')
+    short_description = models.TextField(null=True, blank=True, default='', max_length=200)  #не используется (удалить)!
     price = models.PositiveIntegerField()
     category = models.ForeignKey('ProductCategory', on_delete=models.PROTECT)
     created = models.DateTimeField(auto_now_add=True)
@@ -30,6 +31,6 @@ class ProductImage(models.Model):
     product = models.ForeignKey('Product', related_name='images', on_delete=models.CASCADE)
 
 class ProductCharacteristics(models.Model):
-    name = models.CharField(max_length=20)
-    text = models.CharField(max_length=20)
+    name = models.CharField(max_length=100)
+    text = models.CharField(max_length=500)
     product = models.ForeignKey('Product', related_name='characteristics', on_delete=models.CASCADE)

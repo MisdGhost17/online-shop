@@ -54,6 +54,7 @@ def show_products_for_category(request, cat_id):
     return render(request, 'products/index.html', context)
 
 def product_detail(request, product_id):
+    cart = Cart(request)
     product = Product.objects.get(pk=product_id)
     cart_product_form = CartAddProductForm()
     product_images = ProductImage.objects.filter(product=product_id)
@@ -66,6 +67,7 @@ def product_detail(request, product_id):
         'product_images': product_images,
         'search_form': ProductSearchForm(),
         'product_characteristics': product_characteristics,
+        'products_in_cart': cart.len_all_products_in_cart(),
     }
     return render(request, 'products/product_detail.html', context)
 
@@ -82,3 +84,10 @@ def get_description_by_id(request, product_id):
         'product_description': product_description,
     }
     return render(request, 'products/product_description.html', context)
+
+def get_dinamic_image(request, image_id):
+    dinamic_image = ProductImage.objects.get(id=image_id)
+    context = {
+        'dinamic_image': dinamic_image,
+    }
+    return render(request, 'products/dinamic-image.html', context)
