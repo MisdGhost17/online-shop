@@ -4,6 +4,11 @@ from products.models import Product, ProductCategory, ProductImage, ProductChara
 from products.forms import ProductSearchForm
 from cart.cart import Cart
 
+from rest_framework import generics
+
+from products.serializers import ProductSerializer
+
+
 def redirect_to_allproducts(request):
     return redirect("allproducts")
 
@@ -91,3 +96,7 @@ def get_dinamic_image(request, image_id):
         'dinamic_image': dinamic_image,
     }
     return render(request, 'products/dinamic-image.html', context)
+
+class ProductAPIView(generics.ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
