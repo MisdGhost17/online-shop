@@ -3,9 +3,8 @@ from django.db import models
 # Create your models here.
 class Product(models.Model):
     name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='product', blank=True)
+    image = models.ImageField(upload_to='product')
     description = models.TextField(null=True, blank=True, default='')
-    short_description = models.TextField(null=True, blank=True, default='', max_length=200)  #не используется (удалить)!
     price = models.PositiveIntegerField()
     category = models.ForeignKey('ProductCategory', on_delete=models.PROTECT)
     created = models.DateTimeField(auto_now_add=True)
