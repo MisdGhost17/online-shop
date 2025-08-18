@@ -19,13 +19,14 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from products.views import ProductAPIView
+from products.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('products.urls')),
     path('users/', include('users.urls')),
     path('api/v1/productlist/', ProductAPIView.as_view()),
+    path('api/v1/productdetail/<int:pk>/', ProductDetailAPIView.as_view()),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

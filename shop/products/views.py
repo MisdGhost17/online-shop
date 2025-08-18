@@ -97,6 +97,12 @@ def get_dinamic_image(request, image_id):
     }
     return render(request, 'products/dinamic-image.html', context)
 
-class ProductAPIView(generics.ListAPIView):
+class ProductAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+class ProductDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+

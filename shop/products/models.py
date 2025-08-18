@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Product(models.Model):
     name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='product')
+    image = models.ImageField(upload_to='product', blank=True)
     description = models.TextField(null=True, blank=True, default='')
     short_description = models.TextField(null=True, blank=True, default='', max_length=200)  #не используется (удалить)!
     price = models.PositiveIntegerField()
