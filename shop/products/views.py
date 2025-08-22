@@ -1,12 +1,18 @@
 from django.shortcuts import render, redirect
+from requests import Response
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAdminUser, IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.viewsets import GenericViewSet
+
 from cart.forms import CartAddProductForm
 from products.models import Product, ProductCategory, ProductImage, ProductCharacteristics
 from products.forms import ProductSearchForm
 from cart.cart import Cart
 
-from rest_framework import generics
+from rest_framework import generics, viewsets, mixins
 
-from products.serializers import ProductSerializer
+from products.permissions import IsAdminOrReadOnly
+from products.serializers import ProductSerializer, ProductCategorySerializer
 
 
 def redirect_to_allproducts(request):
@@ -97,12 +103,17 @@ def get_dinamic_image(request, image_id):
     }
     return render(request, 'products/dinamic-image.html', context)
 
-class ProductAPIView(generics.ListCreateAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
 
-class ProductDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classes = [IsAdminOrReadOnly, ]
+
+
+class ProductCategoryViewSet(viewsets.ModelViewSet):
+    queryset = ProductCategory.objects.all()
+    serializer_class = ProductCategorySerializer
+    permission_classes = [IsAdminOrReadOnly, ]
+
 
 
