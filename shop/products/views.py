@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
-from requests import Response
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view
 from rest_framework.permissions import IsAdminUser, IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import GenericViewSet
-
+from rest_framework.response import Response
 from cart.forms import CartAddProductForm
 from products.models import Product, ProductCategory, ProductImage, ProductCharacteristics
 from products.forms import ProductSearchForm
@@ -12,7 +11,7 @@ from cart.cart import Cart
 from rest_framework import generics, viewsets, mixins
 
 from products.permissions import IsAdminOrReadOnly
-from products.serializers import ProductSerializer, ProductCategorySerializer
+from products.serializers import ProductSerializer, ProductCategorySerializer, ProductCharacteristicsSerializer
 
 
 def redirect_to_allproducts(request):
@@ -110,10 +109,26 @@ class ProductViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAdminOrReadOnly, ]
 
 
+
 class ProductCategoryViewSet(viewsets.ModelViewSet):
     queryset = ProductCategory.objects.all()
     serializer_class = ProductCategorySerializer
     permission_classes = [IsAdminOrReadOnly, ]
+
+class ProductCharacteristicsViewSet(viewsets.ModelViewSet):
+    queryset = ProductCharacteristics.objects.all()
+    serializer_class = ProductCharacteristicsSerializer
+    permission_classes = [IsAdminOrReadOnly, ]
+
+    @action(detail=True, methods=['get', 'post'])
+    def get_chars(self, request, pk=None):
+        chrs = ProductCharacteristics.objects.filter(product_id=pk)
+        serializer = ProductCharacteristicsSerializer(chrs, many=True)
+        return Response(serializer.data)
+
+
+
+
 
 
 

@@ -26,6 +26,8 @@ urlpatterns = [
     path('', include('products.urls')),
     path('users/', include('users.urls')),
     path('api/v1/productlist/', ProductViewSet.as_view({'get': 'list', 'post': 'create'})),
+    path('api/v1/charslist/', ProductCharacteristicsViewSet.as_view({'get': 'list', 'post': 'create'})),
+    path('api/v1/productchars/<int:pk>/', ProductCharacteristicsViewSet.as_view({'get': 'get_chars', 'post': 'create'})),
     path('api/v1/categorylist/', ProductCategoryViewSet.as_view({'get': 'list', 'post': 'create'})),
     path('api/v1/auth/', include('djoser.urls')),
     re_path(r'api/v1/auth/', include('djoser.urls.authtoken')),
