@@ -1,14 +1,18 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth, messages
-
+from rest_framework import viewsets
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAdminUser, IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.response import Response
 from cart.cart import Cart
 from users.forms import UserLoginForm, UserRegisterForm, UserProfileChangeForm
 from django.urls import reverse
 from .models import User
-
+import requests
 from products.forms import ProductSearchForm
 from products.models import ProductCategory
+
 
 def login(request):
     if request.method == 'POST':
@@ -78,3 +82,4 @@ def update(request):
         'products_in_cart' : cart.len_all_products_in_cart(),
     }
     return render(request, 'users/kabinet.html', context)
+

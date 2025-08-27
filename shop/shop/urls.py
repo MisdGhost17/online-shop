@@ -20,6 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from products.views import *
+from users.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -37,7 +38,9 @@ urlpatterns = [
     path('api/v1/category/', ProductCategoryViewSet.as_view({'get': 'list', 'post': 'create'})),
     path('api/v1/category/<int:pk>/', ProductCategoryViewSet.as_view({'get': 'retrieve', 'delete': 'destroy', 'put': 'update'})),
 
-    path('api/v1/productimages/', ProductImagesViewSet.as_view({'get': 'list', 'post': 'create'})),
+    path('api/v1/images/', ProductImagesViewSet.as_view({'get': 'list', 'post': 'create'})),
+    path('api/v1/productimages/<int:pk>/', ProductImagesViewSet.as_view({'get': 'get_product_images', 'post': 'create'})),
+    path('api/v1/images/<int:pk>/', ProductImagesViewSet.as_view({'get': 'retrieve', 'put': 'update', 'delete': 'destroy'})),
 
     path('api/v1/auth/', include('djoser.urls')),
     re_path(r'api/v1/auth/', include('djoser.urls.authtoken')),

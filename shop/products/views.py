@@ -146,6 +146,12 @@ class ProductImagesViewSet(viewsets.ModelViewSet):
     serializer_class = ProductImageSerializer
     permission_classes = [IsAdminOrReadOnly, ]
 
+    @action(detail=True, methods=['get', 'post'])
+    def get_product_images(self, request, pk=None):
+        images = ProductImage.objects.filter(product_id=pk)
+        serializer = ProductImageSerializer(images, many=True)
+        return Response(serializer.data)
+
 
 
 
