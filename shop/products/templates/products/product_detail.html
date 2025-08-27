@@ -6,12 +6,12 @@
     <div class="product-detail-top">
         <div class="product-detail-left">
             <div id="div-dinamic-image" class="product-detail-left-div-for-img">
-                <img src="{{ product.image.url }}">
+                <img src="{{ product.main_image.url }}">
             </div>
             <div class="product-detail-other-images">
             {% for product_image in product_images %}
                 <div hx-trigger="mouseenter" hx-swap="innerhtml" hx-target="#div-dinamic-image" hx-get="/dimnamicimage={{ product_image.id }}/" class="product-detail-other-image">
-                    <img class="product-image" src="{{ product_image.big_image.url }}"/>
+                    <img class="product-image" src="{{ product_image.image.url }}"/>
                 </div>
             {% endfor %}
             </div>

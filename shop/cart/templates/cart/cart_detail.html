@@ -10,7 +10,7 @@
   {% for item in cart %}
     {% with product=item.product %}
           <div class="product-in-cart">
-                    <img class="product-in-cart-image" src="{{ product.image.url }}"/>
+                    <img class="product-in-cart-image" src="{{ product.main_image.url }}"/>
                     <div class="product-in-cart-name">
                         <a class="product-in-cart-name-name" href="{% url 'productdetail' product.id %}">{{ product.name }}</a>
                         <p class="product-in-cart-id">ID: {{ product.id }}</p>

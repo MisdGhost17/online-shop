@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Product(models.Model):
     name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='product')
+    main_image = models.ImageField(upload_to='product')
     description = models.TextField(null=True, blank=True, default='')
     price = models.PositiveIntegerField()
     category = models.ForeignKey('ProductCategory', on_delete=models.PROTECT)
@@ -26,7 +26,7 @@ class ProductCategory(models.Model):
 
 
 class ProductImage(models.Model):
-    big_image = models.ImageField(upload_to='product')
+    image = models.ImageField(upload_to='product')
     product = models.ForeignKey('Product', related_name='images', on_delete=models.CASCADE)
 
 class ProductCharacteristics(models.Model):

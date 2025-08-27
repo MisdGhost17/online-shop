@@ -9,7 +9,7 @@
                 <p></p>
             </div>
             <div class="div_product_image">
-                <img class="product_image" src="{{ product.image.url }}"/>
+                <img class="product_image" src="{{ product.main_image.url }}"/>
             </div>
             <div class="product_toptext">
                 <a class="product_name" href="{% url 'productdetail' product.id %}"><p>{{ product.name }}</p></a>

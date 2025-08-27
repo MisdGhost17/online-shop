@@ -8,10 +8,11 @@ from products.models import Product, ProductCategory, ProductImage, ProductChara
 from products.forms import ProductSearchForm
 from cart.cart import Cart
 
-from rest_framework import generics, viewsets, mixins
+from rest_framework import generics, viewsets, mixins, status
 
 from products.permissions import IsAdminOrReadOnly
-from products.serializers import ProductSerializer, ProductCategorySerializer, ProductCharacteristicsSerializer
+from products.serializers import ProductSerializer, ProductCategorySerializer, ProductCharacteristicsSerializer, \
+    ProductImageSerializer
 
 
 def redirect_to_allproducts(request):
@@ -108,12 +109,26 @@ class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     permission_classes = [IsAdminOrReadOnly, ]
 
-
+    @action(detail=True, methods=['get', 'put', 'delete'])
+    def product_detail(self, request, pk=None):
+        product = Product.objects.get(pk=pk)
+        characteristics = ProductCharacteristics.objects.filter(product_id=pk)
+        images = ProductImage.objects.filter(product_id=pk)
+        characteristics_serializer = ProductCharacteristicsSerializer(characteristics, many=True)
+        images_serializer = ProductImageSerializer(images, many=True)
+        product_serializer = ProductSerializer(product)
+        return Response({"product": product_serializer.data, "characteristics": characteristics_serializer.data, "product_images": images_serializer.data})
 
 class ProductCategoryViewSet(viewsets.ModelViewSet):
     queryset = ProductCategory.objects.all()
     serializer_class = ProductCategorySerializer
     permission_classes = [IsAdminOrReadOnly, ]
+
+    @action(detail=True, methods=['get', 'put', 'delete'])
+    def category_detail(self, request, pk=None):
+        category = ProductCategory.objects.get(pk=pk)
+        serializer = ProductCategorySerializer(category)
+        return Response(serializer.data)
 
 class ProductCharacteristicsViewSet(viewsets.ModelViewSet):
     queryset = ProductCharacteristics.objects.all()
@@ -125,6 +140,15 @@ class ProductCharacteristicsViewSet(viewsets.ModelViewSet):
         chrs = ProductCharacteristics.objects.filter(product_id=pk)
         serializer = ProductCharacteristicsSerializer(chrs, many=True)
         return Response(serializer.data)
+
+class ProductImagesViewSet(viewsets.ModelViewSet):
+    queryset = ProductImage.objects.all()
+    serializer_class = ProductImageSerializer
+    permission_classes = [IsAdminOrReadOnly, ]
+
+
+
+
 
 
 
