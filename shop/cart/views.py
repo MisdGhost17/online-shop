@@ -6,7 +6,7 @@ from products.forms import ProductSearchForm
 from .cart import Cart
 from .forms import CartAddProductForm
 
-@login_required(login_url='login')
+@login_required(login_url='loginform')
 def add_product(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, pk=product_id)
@@ -17,14 +17,14 @@ def add_product(request, product_id):
                  override_quantity=form.cleaned_data['override'])
     return redirect('allproducts')
 
-@login_required(login_url='login')
+@login_required(login_url='loginfrom')
 def remove_product(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, pk=product_id)
     cart.remove(product)
     return redirect('cart')
 
-@login_required(login_url='login')
+@login_required(login_url='loginform')
 def update_product(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, pk=product_id)
@@ -35,7 +35,7 @@ def update_product(request, product_id):
                  override_quantity=form.cleaned_data['override'])
     return redirect('cart')
 
-@login_required(login_url='login')
+@login_required(login_url='loginform')
 def cart_detail(request):
     form = ProductSearchForm(data=request.POST)
     categories = ProductCategory.objects.all()

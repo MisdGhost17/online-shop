@@ -31,7 +31,9 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    # "localhost",
+]
 
 
 # Application definition
@@ -136,6 +138,8 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -166,6 +170,6 @@ DJOSER = {
     'SERIALIZERS': {
         'user': 'users.serializers.UserSerializer',
         'current_user': 'users.serializers.UserSerializer',
-        'user_create': 'users.serializers.UserSerializer',
+        'user_create': 'users.serializers.UserRegistrationSerializer',
     },
 }

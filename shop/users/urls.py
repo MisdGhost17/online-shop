@@ -3,10 +3,10 @@ from users.views import login, logout, registration, update
 
 
 urlpatterns = [
-    path('account/login', login, name='login'),
-    path('account/logout', logout, name='logout'),
-    path('account/registration', registration, name='registration'),
-    path('account/profileupdate', update, name='profileupdate'),
+    path('account/login', login, name='loginform'),
+    path('account/logout', logout, name='logoutform'),
+    path('account/registration', registration, name='registrationform'),
+    path('account/profileupdate', update, name='profileupdateform'),
 
 
 ]

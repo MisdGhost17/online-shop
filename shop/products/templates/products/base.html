@@ -46,11 +46,11 @@
         </a>
       </div>
         <div class="profile-img">
-      <a href="{% url 'profileupdate' %}"><img src="{% static "img/free-icon-user-profile-2734847.png" %}"></a>
+      <a href="{% url 'profileupdateform' %}"><img src="{% static "img/free-icon-user-profile-2734847.png" %}"></a>
     </div>
     {% else %}
     <div class="header-block login">
-      <a href="{% url 'login' %}">Войти/Зарегистрироваться</a>
+      <a href="{% url 'loginform' %}">Войти/Зарегистрироваться</a>
     </div>
     {% endif %}
   <nav class="categories">

@@ -1,7 +1,5 @@
 from django.shortcuts import render, redirect
 from rest_framework.decorators import action, api_view
-from rest_framework.permissions import IsAdminUser, IsAuthenticated, IsAuthenticatedOrReadOnly
-from rest_framework.viewsets import GenericViewSet
 from rest_framework.response import Response
 from cart.forms import CartAddProductForm
 from products.models import Product, ProductCategory, ProductImage, ProductCharacteristics
